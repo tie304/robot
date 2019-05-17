@@ -1,6 +1,6 @@
 import time
 from pysabertooth import Sabertooth
-from robot import Robot
+from models.robot import Robot
 
 PORT = "/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A105QI4I-if00-port0"
 
