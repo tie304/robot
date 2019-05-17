@@ -16,7 +16,7 @@ class Robot:
         return self.driver.stop()
 
     def forward(self):
-        return self.driver.driveBoth(self.forward_speed,self.forward_speed)
+        self.driver.driveBoth(self.forward_speed,self.forward_speed)
 
     def backward(self):
         return self.driver.driveBoth(self.backward_speed,self.backward_speed)
