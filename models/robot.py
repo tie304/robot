@@ -1,7 +1,7 @@
 
 
 class Robot:
-    def __init__(self,diver):
+    def __init__(self,driver):
         self.driver = driver
         self.forward_speed = 50
         self.backward_speed = -50
