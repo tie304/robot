@@ -9,7 +9,6 @@ saber = Sabertooth(PORT, baudrate=9600, address=128, timeout=0.1)
 
 
 
-
 robot = Robot(saber)
 
 
@@ -24,3 +23,8 @@ robot.backward()
 time.sleep(3)
 print("stopping")
 robot.stop()
+print("turning left")
+robot.left()
+time.sleep(3)
+print("turning right")
+robot.right()
