@@ -7,10 +7,11 @@ PORT = "/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A105QI4I-if00-port0"
 
 saber = Sabertooth(PORT, baudrate=9600, address=128, timeout=0.1)
 
-console.log(saber)
+print(saber)
 
 saber.drive(1, 50)
 time.sleep(3)
+
 
 robot = Robot(saber)
 
