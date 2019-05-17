@@ -1,7 +1,7 @@
 
 
 class Robot:
-    def __init__(diver):
+    def __init__(self,diver):
         self.driver = driver
         self.forward_speed = 50
         self.backward_speed = -50
@@ -13,7 +13,7 @@ class Robot:
         pass
 
     def stop(self):
-        return self.driver.stop()        
+        return self.driver.stop()
 
     def forward(self):
         return self.diver.driveBoth(self.forward_speed,self.forward_speed)
