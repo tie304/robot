@@ -1,17 +1,4 @@
-import sys, termios, tty, os
-import time
-from pysabertooth import Sabertooth
-from models.robot import Robot
-
-PORT = "/dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A105QI4I-if00-port0"
-
-
-saber = Sabertooth(PORT, baudrate=9600, address=128, timeout=0.1)
-
-
-
-robot = Robot(saber)
-
+import sys, termios, tty, os, time
 
 def getch():
     fd = sys.stdin.fileno()
@@ -28,28 +15,27 @@ button_delay = 0.2
 
 while True:
     char = getch()
-
+    print(char)
 
     if char == "p":
-        print("Stoping robot")
+        print("Stop!")
         exit(0)
 
     if char == " ":
-        robot.stop()
-        time.sleep(button_delay)
+        print("space")
 
     if char == "a":
-        robot.left()
+        print("Left pressed")
         time.sleep(button_delay)
 
     elif char == "d":
-        robot.right()
+        print("Right pressed")
         time.sleep(button_delay)
 
     elif char == "w":
-        robot.forward()
+        print("Up pressed")
         time.sleep(button_delay)
 
     elif char == "s":
-        robot.backward()
+        print("Down pressed")
         time.sleep(button_delay)
