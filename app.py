@@ -28,7 +28,7 @@ button_delay = 0.2
 
 while True:
     char = getch()
-    char = char.lower()
+    
 
     if char == "p":
         print("Stoping robot")
