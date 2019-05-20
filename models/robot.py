@@ -20,7 +20,7 @@ class Robot:
         return self.driver.stop()
 
     def forward(self):
-        offset_speed = (self.forward_speed * self.offset) + forward_speed
+        offset_speed = (self.forward_speed * self.offset) + self.forward_speed
         self.driver.drive(1,offset_speed)
         self.driver.drive(2,self.forward_speed)
 
