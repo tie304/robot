@@ -9,12 +9,12 @@ class Robot:
         self.offset = .10
 
     def left(self):
-        self.driver.drive(1,self.forward_speed - 15)
-        self.driver.drive(2,self.forward_speed)
+        self.driver.drive(1,self.forward_speed)
+        self.driver.drive(2,self.forward_speed - 15)
 
     def right(self):
-        self.driver.drive(1,self.forward_speed)
-        self.driver.drive(2,self.backward_speed - 15)
+        self.driver.drive(1,self.forward_speed - 15)
+        self.driver.drive(2,self.forward_speed)
 
     def stop(self):
         return self.driver.stop()
