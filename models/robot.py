@@ -6,7 +6,7 @@ class Robot:
         self.forward_speed = -50
         self.backward_speed = 50
         self.turn_slow = 2
-        self.offset = .15
+        self.offset = .12
 
     def left(self):
         self.driver.drive(1,self.backward_speed / self.turn_slow)
