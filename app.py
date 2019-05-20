@@ -1,3 +1,4 @@
+import sys, termios, tty, os
 import time
 from pysabertooth import Sabertooth
 from models.robot import Robot
@@ -12,29 +13,43 @@ saber = Sabertooth(PORT, baudrate=9600, address=128, timeout=0.1)
 robot = Robot(saber)
 
 
-print("going forward")
-robot.forward()
-time.sleep(3)
-print("Stopping robot")
-robot.stop()
-time.sleep(3)
+def getch():
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(sys.stdin.fileno())
+        ch = sys.stdin.read(1)
 
-print("going backward")
-robot.backward()
-time.sleep(3)
-print("stopping robot")
-robot.stop()
-time.sleep(3)
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    return ch
 
-print("turning left")
-robot.left()
-time.sleep(3)
-print("Stopping robot")
-robot.stop()
-time.sleep(3)
+button_delay = 0.2
 
-print("turning right")
-robot.right()
-time.sleep(3)
-print("Stopping robot")
-robot.stop()
+while True:
+    char = getch()
+    
+
+    if char == "p":
+        print("Stoping robot")
+        exit(0)
+
+    if char == " ":
+        robot.stop()
+        time.sleep(button_delay)
+
+    if char == "a":
+        robot.left()
+        time.sleep(button_delay)
+
+    elif char == "d":
+        robot.right()
+        time.sleep(button_delay)
+
+    elif char == "w":
+        robot.forward()
+        time.sleep(button_delay)
+
+    elif char == "s":
+        robot.backward()
+        time.sleep(button_delay)
