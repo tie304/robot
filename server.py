@@ -1,36 +1,58 @@
 import io
+
 import socket
+import time
+import sys
 import struct
 from PIL import Image
+import numpy as np
+from multiprocessing import Process
+from pynput import keyboard
+
 
 # Start a socket listening for connections on 0.0.0.0:8000 (0.0.0.0 means
 # all interfaces)
-server_socket = socket.socket()
+HEADER_LENGTH = 10
+
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.bind(('0.0.0.0', 8000))
 server_socket.listen(0)
 
+current_key = None
 # Accept a single connection and make a file-like object out of it
-connection = server_socket.accept()[0].makefile('rb')
-name = 0
+def on_press(key):
+    try:
+        global current_key
+        current_key = key.char
+    except AttributeError:
+        pass        
+def on_release(key):
+
+    if key == keyboard.Key.esc:
+        # Stop listener
+        return False
+
+# Collect events until released
+
+listener = keyboard.Listener(
+    on_press=on_press,
+    on_release=on_release)
+listener.start()
+
+# ...or, in a non-blocking fashion:
+
+print('starting sockets')
 try:
     while True:
-        # Read the length of the image as a 32-bit unsigned int. If the
-        # length is zero, quit the loop
-        image_len = struct.unpack('<L', connection.read(struct.calcsize('<L')))[0]
-        if not image_len:
-            break
-        # Construct a stream to hold the image data and read the image
-        # data from the connection
-        image_stream = io.BytesIO()
-        image_stream.write(connection.read(image_len))
-        # Rewind the stream, open it as an image with PIL and do some
-        # processing on it
-        image_stream.seek(0)
-        image = Image.open(image_stream)
-        print('Image is %dx%d' % image.size)
-        image.verify()
-        image.save(f'image-{name}'.jpg)
-        name+=1
+        client, addr = server_socket.accept()
+        print(client, "has connected")
+
+        while True:
+            if current_key:
+                client.send(bytes(current_key, "utf-8"))
+                current_key = None
+    conn.close()
+    print('client disconnected')
+
 finally:
-    connection.close()
     server_socket.close()

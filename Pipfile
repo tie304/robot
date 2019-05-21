@@ -9,6 +9,10 @@ verify_ssl = true
 pysabertooth = "*"
 pil = "*"
 pillow = "*"
+numpy = "*"
+opencv-python = "*"
+termios = "*"
+pynput = "*"
 
 [requires]
 python_version = "3.7"
