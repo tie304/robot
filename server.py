@@ -25,7 +25,7 @@ def on_press(key):
         global current_key
         current_key = key.char
     except AttributeError:
-        pass        
+        pass
 def on_release(key):
 
     if key == keyboard.Key.esc:

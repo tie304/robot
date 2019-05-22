@@ -18,8 +18,6 @@ class Camera:
 
     def record(self):
         print("recording...")
-
-
         label = self.label
         if label is not None:
             image_name = "image-"+ label + "-" + str(self.image_id) + ".jpg"
